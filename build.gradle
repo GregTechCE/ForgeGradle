@@ -30,7 +30,7 @@ repositories {
     mavenLocal()
     maven {
         name = "forge"
-        url = "https://files.minecraftforge.net/maven"
+        url = "https://maven.minecraftforge.net/"
     }
     maven {
         // because Srg2Source needs an eclipse dependency.
@@ -361,19 +361,7 @@ uploadArchives {
     repositories.mavenDeployer {
 
         dependsOn 'build'
-
-        if (project.hasProperty('forgeMavenPassword'))
-        {
-            repository(url: "https://files.minecraftforge.net/maven/manage/upload") {
-                authentication(userName: project.getProperty('forgeMavenUser'), password: project.getProperty('forgeMavenPassword'))
-            }
-        }
-        else
-        {
-            // local repo folder. Might wanna juset use  gradle install   if you wanans end it to maven-local
-            repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
-        }
-
+        repository(url: project.repositories.mavenLocal().getUrl())
 
         pom {
             groupId = project.group
@@ -382,18 +370,18 @@ uploadArchives {
             project {
                 name project.archivesBaseName
                 packaging 'jar'
-                description 'Gradle plugin for Forge'
-                url 'https://github.com/MinecraftForge/ForgeGradle'
+                description 'GTCE Gradle plugin fork for Forge'
+                url 'https://github.com/GregTechCE/ForgeGradle'
 
                 scm {
-                    url 'https://github.com/MinecraftForge/ForgeGradle'
-                    connection 'scm:git:git://github.com/MinecraftForge/ForgeGradle.git'
-                    developerConnection 'scm:git:git@github.com:MinecraftForge/ForgeGradle.git'
+                    url 'https://github.com/GregTechCE/ForgeGradle'
+                    connection 'scm:git:git://github.com/GregTechCE/ForgeGradle.git'
+                    developerConnection 'scm:git:git@github.com:GregTechCE/ForgeGradle.git'
                 }
 
                 issueManagement {
                     system 'github'
-                    url 'https://github.com/MinecraftForge/ForgeGradle/issues'
+                    url 'https://github.com/GregTechCE/ForgeGradle/issues'
                 }
 
                 licenses {
